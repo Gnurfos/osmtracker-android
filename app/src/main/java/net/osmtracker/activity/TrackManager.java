@@ -3,12 +3,12 @@ package net.osmtracker.activity;
 import java.io.File;
 import java.util.Date;
 
+import android.content.*;
 import net.osmtracker.OSMTracker;
 import net.osmtracker.R;
 import net.osmtracker.db.DataHelper;
 import net.osmtracker.db.TrackContentProvider;
 import net.osmtracker.db.TracklistAdapter;
-import net.osmtracker.exception.CreateTrackException;
 import net.osmtracker.gpx.ExportAndShareTask;
 import net.osmtracker.gpx.ExportToStorageTask;
 import net.osmtracker.util.FileSystemUtils;
@@ -16,11 +16,7 @@ import net.osmtracker.util.FileSystemUtils;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -102,7 +98,7 @@ public class TrackManager extends ListActivity {
 			// we will use the flag selectionSet to handle the while loop
 			boolean selectionSet = false;
 			while(!selectionSet && cursor.moveToNext()){
-				if(cursor.getInt(cursor.getColumnIndex(TrackContentProvider.Schema.COL_ACTIVE)) == 1){
+				if(cursor.getInt(cursor.getColumnIndex(TrackContentProvider.Schema.COL_ACTIVE)) == TrackContentProvider.Schema.VAL_TRACK_ACTIVE){
 					// This is the active track
 					// set selection to the current cursor position
 					getListView().setSelection(cursor.getPosition());
@@ -165,7 +161,7 @@ public class TrackManager extends ListActivity {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		if (currentTrackId != -1) {
+		if (currentTrackId != TRACK_ID_NO_TRACK) {
 			// Currently tracking. Display "Continue" option
 			menu.findItem(R.id.trackmgr_menu_continuetrack).setVisible(true);
 			
@@ -188,21 +184,17 @@ public class TrackManager extends ListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.trackmgr_menu_newtrack:
+		case R.id.trackmgr_menu_newtrack: {
 			// Start track logger activity
-			try {
-				Intent i = new Intent(this, TrackLogger.class);
-				// New track
-				currentTrackId = createNewTrack();
-				i.putExtra(TrackContentProvider.Schema.COL_TRACK_ID, currentTrackId);
-				startActivity(i);
-			} catch (CreateTrackException cte) {
-				Toast.makeText(this,
-						getResources().getString(R.string.trackmgr_newtrack_error).replace("{0}", cte.getMessage()),
-						Toast.LENGTH_LONG)
-						.show();
-			}
+			Intent i = new Intent(this, TrackLogger.class);
+			// New track
+			long newTrackId = createNewTrack();
+			setActiveTrack(newTrackId);
+			currentTrackId = newTrackId;
+			i.putExtra(TrackContentProvider.Schema.COL_TRACK_ID, currentTrackId);
+			startActivity(i);
 			break;
+		}
 		case R.id.trackmgr_menu_continuetrack:
 			Intent i = new Intent(this, TrackLogger.class);
 			i.putExtra(TrackLogger.STATE_IS_TRACKING, true);
@@ -441,12 +433,15 @@ public class TrackManager extends ListActivity {
 		startActivity(i);
 	}
 
+	private long createNewTrack() {
+		return createNewTrack(getContentResolver());
+	}
+
 	/**
 	 * Creates a new track, in DB and on SD card
 	 * @return The ID of the new track
-	 * @throws CreateTrackException
 	 */
-	private long createNewTrack() throws CreateTrackException {
+	public static long createNewTrack(ContentResolver contentResolver) {
 		Date startDate = new Date();
 		
 		// Create entry in TRACK table
@@ -454,12 +449,9 @@ public class TrackManager extends ListActivity {
 		values.put(TrackContentProvider.Schema.COL_NAME, "");
 		values.put(TrackContentProvider.Schema.COL_START_DATE, startDate.getTime());
 		values.put(TrackContentProvider.Schema.COL_ACTIVE, TrackContentProvider.Schema.VAL_TRACK_ACTIVE);
-		Uri trackUri = getContentResolver().insert(TrackContentProvider.CONTENT_URI_TRACK, values);
+		Uri trackUri = contentResolver.insert(TrackContentProvider.CONTENT_URI_TRACK, values);
 		long trackId = ContentUris.parseId(trackUri);
 
-		// set the active track
-		setActiveTrack(trackId);
-		
 		return trackId;
 	}
 	

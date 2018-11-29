@@ -1,21 +1,16 @@
 package net.osmtracker.db;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-
-import net.osmtracker.OSMTracker;
-
-import android.content.ContentResolver;
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.database.Cursor;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import net.osmtracker.OSMTracker;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
 
 /**
  * Data helper for dialoging with content resolver and filesystem.

@@ -166,11 +166,26 @@ public class TrackLogger extends Activity {
 
 	private ArrayList<String> layoutNameTags = new ArrayList<String>();
 
+	private boolean startedByShortcut;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		// Get the track id to work with
-		currentTrackId = getIntent().getExtras().getLong(TrackContentProvider.Schema.COL_TRACK_ID);
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			startedByShortcut = false;
+			// Track was created/provided by the TrackManager
+			currentTrackId = extras.getLong(TrackContentProvider.Schema.COL_TRACK_ID);
+		} else {
+			startedByShortcut = true;
+			// Coming from outside, but maybe a track was already being recorded
+			currentTrackId = DataHelper.getActiveTrackId(getContentResolver());
+			if (currentTrackId == -1) {
+				// Create the track ourselves and start tracking
+				currentTrackId = TrackManager.createNewTrack(getContentResolver());
+			}
+		}
 		Log.v(TAG, "Starting for track id " + currentTrackId);
 
 		//save the initial layout file name in tags array
@@ -818,6 +833,16 @@ public class TrackLogger extends Activity {
 				}
 				return;
 			}
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (startedByShortcut) {
+			startActivity(new Intent(TrackLogger.this, TrackManager.class));
+			finish();
+		} else {
+			super.onBackPressed();
 		}
 	}
 

@@ -19,7 +19,15 @@
 			</intent-filter>
 		</activity>
 		
-		<activity android:name="net.osmtracker.activity.TrackLogger" android:label="@string/tracklogger" android:launchMode="singleTop"/>
+		<activity android:name="net.osmtracker.activity.TrackLogger" android:label="@string/tracklogger" android:launchMode="singleTop">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+			<meta-data android:name="android.app.shortcuts"
+					   android:resource="@xml/shortcuts" />
+		</activity>
+
 		<activity android:name="net.osmtracker.activity.Preferences" android:label="@string/prefs" />
 		<activity android:name="net.osmtracker.activity.WaypointList" android:label="@string/wplist" />
 		<activity android:name="net.osmtracker.activity.TrackDetail" android:label="@string/trackdetail" />
