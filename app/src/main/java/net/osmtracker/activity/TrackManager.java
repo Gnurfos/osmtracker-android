@@ -9,6 +9,7 @@ import net.osmtracker.db.DataHelper;
 import net.osmtracker.db.TrackContentProvider;
 import net.osmtracker.db.TracklistAdapter;
 import net.osmtracker.exception.CreateTrackException;
+import net.osmtracker.gpx.ExportAndShareTask;
 import net.osmtracker.gpx.ExportToStorageTask;
 import net.osmtracker.util.FileSystemUtils;
 
@@ -337,7 +338,7 @@ public class TrackManager extends ListActivity {
 			menu.findItem(R.id.trackmgr_contextmenu_stop).setVisible(false);
 		}
 		menu.setHeaderTitle(getResources().getString(R.string.trackmgr_contextmenu_title).replace("{0}", Long.toString(selectedId)));
-		if ( currentTrackId ==  selectedId) {
+		if ( currentTrackId == selectedId) {
 			// User has pressed the active track, hide the delete option
 			menu.removeItem(R.id.trackmgr_contextmenu_delete);
 		}
@@ -387,6 +388,9 @@ public class TrackManager extends ListActivity {
 		case R.id.trackmgr_contextmenu_export:
 			trackId = info.id;
 			requestPermissionAndExport(this.RC_WRITE_PERMISSIONS_EXPORT_ONE);
+			break;
+		case R.id.trackmgr_contextmenu_share:
+			new ExportAndShareTask(this, info.id).execute();
 			break;
 		case R.id.trackmgr_contextmenu_osm_upload:
 			i = new Intent(this, OpenStreetMapUpload.class);
@@ -439,7 +443,7 @@ public class TrackManager extends ListActivity {
 
 	/**
 	 * Creates a new track, in DB and on SD card
-	 * @returns The ID of the new track
+	 * @return The ID of the new track
 	 * @throws CreateTrackException
 	 */
 	private long createNewTrack() throws CreateTrackException {
@@ -461,7 +465,7 @@ public class TrackManager extends ListActivity {
 	
 	/**
 	 * Deletes the track with the specified id from DB and SD card
-	 * @param The ID of the track to be deleted
+	 * @param id The ID of the track to be deleted
 	 */
 	private void deleteTrack(long id) {
 		getContentResolver().delete(
@@ -574,4 +578,13 @@ public class TrackManager extends ListActivity {
 	}
 
 
+
+    /**
+	 * Clean up the temp file after it was shared with external app
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+		ExportAndShareTask.deleteSharedFile(requestCode);
+    }
 }

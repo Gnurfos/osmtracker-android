@@ -11,6 +11,7 @@ import net.osmtracker.OSMTracker;
 import net.osmtracker.R;
 import net.osmtracker.db.TrackContentProvider;
 import net.osmtracker.db.model.Track;
+import net.osmtracker.gpx.ExportAndShareTask;
 import net.osmtracker.gpx.ExportToStorageTask;
 import net.osmtracker.util.MercatorProjection;
 
@@ -89,22 +90,22 @@ public class TrackDetail extends TrackDetailEditor implements AdapterView.OnItem
 			@Override
 			public void onClick(View v) {
 				save();
-				finish();				
+				finish();
 			}
 		});
-				
+
 		final Button btnCancel = (Button) findViewById(R.id.trackdetail_btn_cancel);
 		btnCancel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// Just close the dialog
-				finish();				
+				finish();
 			}
 		});
-		
+
 		// Do not show soft keyboard by default
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-		
+
 		// further work is done in onResume.
 	}
 
@@ -215,7 +216,10 @@ public class TrackDetail extends TrackDetailEditor implements AdapterView.OnItem
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent i;
-		
+		SimpleAdapter adapter;
+		@SuppressWarnings("unchecked")
+		Map<String, String> data;
+
 		switch(item.getItemId()) {
 		case R.id.trackdetail_menu_save:
 			save();
@@ -263,6 +267,14 @@ public class TrackDetail extends TrackDetailEditor implements AdapterView.OnItem
 				exportTrack();
 				break;
 			}
+        case R.id.trackdetail_menu_share:
+            new ExportAndShareTask(this, trackId).execute();
+            // Pick last list item (Exported date) and update it
+            adapter = ((SimpleAdapter) lv.getAdapter());
+            data = (Map<String, String>) adapter.getItem(adapter.getCount()-1);
+            data.put(ITEM_VALUE, DateFormat.getDateTimeInstance().format(new Date(System.currentTimeMillis())));
+            adapter.notifyDataSetChanged();
+            break;
 		case R.id.trackdetail_menu_osm_upload:
 			i = new Intent(this, OpenStreetMapUpload.class);
 			i.putExtra(TrackContentProvider.Schema.COL_TRACK_ID, trackId);
@@ -360,5 +372,14 @@ public class TrackDetail extends TrackDetailEditor implements AdapterView.OnItem
 		}
 
 	}  // inner class TrackDetailSimpleAdapter
+
+    /**
+     * Clean up the temp file after it was shared with external app
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ExportAndShareTask.deleteSharedFile(requestCode);
+    }
 
 }  // public class TrackDetail

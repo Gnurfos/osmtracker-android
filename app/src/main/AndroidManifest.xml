@@ -42,7 +42,7 @@
 		</activity>
 		<activity android:name="net.osmtracker.activity.AvailableLayouts">
 		</activity>
-    
+
 		<service android:name="net.osmtracker.service.gps.GPSLogger" android:exported="false">
 			<intent-filter>
 				<action android:name="osmtracker.intent.GPS_SERVICE" />
@@ -53,7 +53,13 @@
 		    android:authorities="net.osmtracker.provider"
 		    android:exported="false" />
 
-		<receiver android:name="net.osmtracker.receiver.MediaButtonReceiver" >
+		<provider
+			android:name="net.osmtracker.gpx.TrackFileProvider"
+			android:authorities="net.osmtracker.fileshareprovider"
+			android:exported="false"
+			android:grantUriPermissions="true"/>
+
+        <receiver android:name="net.osmtracker.receiver.MediaButtonReceiver" >
 	        <intent-filter>
 	            <action android:name="android.intent.action.MEDIA_BUTTON" />               
 	        </intent-filter>
