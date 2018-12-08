@@ -5,8 +5,8 @@
             android:icon="@mipmap/ic_launcher">
         <intent
                 android:action="android.intent.action.VIEW"
-                android:targetPackage="net.osmtracker"
-                android:targetClass="net.osmtracker.activity.TrackLogger" />
+                android:targetPackage="com.nastybit.osmtracker"
+                android:targetClass="com.nastybit.osmtracker.activity.TrackLogger" />
         <categories android:name="android.shortcut.conversation" />
     </shortcut>
 </shortcuts>
