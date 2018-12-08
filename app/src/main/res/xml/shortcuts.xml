@@ -2,7 +2,7 @@
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
     <shortcut
             android:enabled="true"
-            android:icon="@drawable/ic_launcher">
+            android:icon="@mipmap/ic_launcher">
         <intent
                 android:action="android.intent.action.VIEW"
                 android:targetPackage="net.osmtracker"
