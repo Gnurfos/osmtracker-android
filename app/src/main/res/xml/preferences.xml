@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-	<ListPreference android:title="@string/prefs_voicerec_duration"
-		android:key="voicerec.duration" android:entryValues="@array/prefs_voicerec_durations"
-		android:defaultValue="2" android:entries="@array/prefs_voicerec_durations"></ListPreference>
-	<CheckBoxPreference android:key="sound_enabled" android:title="@string/prefs_sound_enabled"
-		android:summary="@string/prefs_sound_enabled_summary" android:defaultValue="true"></CheckBoxPreference>
-	<com.android.internal.preference.YesNoPreference android:key="osm.oauth.clear-data"
-		android:title="@string/prefs_osm_clear_oauth_data" android:summary="@string/prefs_osm_clear_oauth_data_summary"
-		android:dialogMessage="@string/prefs_osm_clear_oauth_data_dialog" android:dialogIcon="@android:drawable/ic_dialog_alert" />
-	
+
 	<PreferenceCategory android:title="@string/prefs_gps">
 		<Preference android:summary="@string/prefs_gps_os_settings_summary"
 			android:title="@string/prefs_gps_os_settings" android:key="gps.ossettings"></Preference>
@@ -40,15 +32,10 @@
 	</PreferenceCategory>
 
 	<PreferenceCategory android:title="@string/prefs_ui">
-		<ListPreference android:defaultValue="none" android:key="ui.picture.source" android:title="@string/prefs_ui_picture_source"
-			android:summary="@string/prefs_ui_picture_source_summary" android:entries="@array/prefs_ui_picture_source_keys" android:entryValues="@array/prefs_ui_picture_source_values"></ListPreference>
 		<CheckBoxPreference android:key="ui.display_keep_on" android:title="@string/prefs_display_always_on"
 			android:summary="@string/prefs_display_always_on_summary" android:defaultValue="true"></CheckBoxPreference>
 		<ListPreference android:entries="@array/prefs_theme_keys" android:title="@string/prefs_theme"
 			android:entryValues="@array/prefs_theme_values" android:key="ui.theme" android:summary="@string/prefs_theme_summary" android:defaultValue="@style/DefaultTheme"></ListPreference>
-		<PreferenceScreen android:title="@string/prefs_ui_buttons_layout" android:summary="@string/prefs_ui_buttons_layout_summary">
-			<intent android:action="launch_buttons_presets"></intent>
-		</PreferenceScreen>
 		<CheckBoxPreference android:key="ui.displaytrack.osm" android:title="@string/prefs_displaytrack_osm"
 			android:summary="@string/prefs_displaytrack_osm_summary" android:defaultValue="false"></CheckBoxPreference>
 		<ListPreference android:entries="@array/prefs_map_tile_keys" android:title="@string/prefs_map_tile"

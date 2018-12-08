@@ -275,11 +275,6 @@ public class TrackDetail extends TrackDetailEditor implements AdapterView.OnItem
             data.put(ITEM_VALUE, DateFormat.getDateTimeInstance().format(new Date(System.currentTimeMillis())));
             adapter.notifyDataSetChanged();
             break;
-		case R.id.trackdetail_menu_osm_upload:
-			i = new Intent(this, OpenStreetMapUpload.class);
-			i.putExtra(TrackContentProvider.Schema.COL_TRACK_ID, trackId);
-			startActivity(i);
-			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}

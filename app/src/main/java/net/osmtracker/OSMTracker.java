@@ -16,7 +16,6 @@ public class OSMTracker {
 	public static final class Preferences {
 		// Property names
 		public final static String KEY_STORAGE_DIR = "logging.storage.dir";
-		public final static String KEY_VOICEREC_DURATION = "voicerec.duration";
 		public final static String KEY_UI_THEME = "ui.theme";
 		public final static String KEY_GPS_OSSETTINGS = "gps.ossettings";
 		public final static String KEY_GPS_CHECKSTARTUP = "gps.checkstartup";
@@ -28,27 +27,15 @@ public class OSMTracker {
 		public final static String KEY_OUTPUT_DIR_PER_TRACK = "gpx.directory_per_track";
 		public final static String KEY_OUTPUT_COMPASS = "gpx.compass_heading";
 		
-		public final static String KEY_UI_PICTURE_SOURCE = "ui.picture.source";
-		public final static String KEY_UI_BUTTONS_LAYOUT = "ui.buttons.layout";
 		public final static String KEY_UI_DISPLAYTRACK_OSM = "ui.displaytrack.osm";
 		/** True if DisplayTrack activity has already asked the user whether they'd rather see DisplayTrackMap. */
 		public static final String KEY_UI_ASKED_DISPLAYTRACK_OSM = "ui.displaytrack.asked_osm";
 		public final static String KEY_UI_DISPLAY_KEEP_ON = "ui.display_keep_on";
 		public final static String KEY_UI_MAP_TILE = "ui.map.tile";
-		public final static String KEY_SOUND_ENABLED = "sound_enabled";
 		public final static String KEY_UI_ORIENTATION = "ui.orientation";
-		public final static String KEY_OSM_OAUTH_TOKEN = "osm.oauth.token";
-		public final static String KEY_OSM_OAUTH_SECRET = "osm.oauth.secret";
-		public final static String KEY_OSM_OAUTH_CLEAR_DATA = "osm.oauth.clear-data";
-
-		//keys for repository settings
-		public final static String KEY_GITHUB_USERNAME = "github_username";
-		public final static String KEY_REPOSITORY_NAME = "repository_name";
-		public final static String KEY_BRANCH_NAME = "branch_name";
 
 		// Default values
 		public final static String VAL_STORAGE_DIR = "/osmtracker";
-		public final static String VAL_VOICEREC_DURATION = "2";
 		public final static String VAL_UI_THEME = "net.osmtracker:style/DefaultTheme";
 		public final static boolean VAL_GPS_CHECKSTARTUP = true;
 		public final static boolean VAL_GPS_IGNORE_CLOCK = false;
@@ -72,15 +59,8 @@ public class OSMTracker {
 		public final static boolean VAL_OUTPUT_GPX_HDOP_APPROXIMATION = false;
 		public final static boolean VAL_OUTPUT_GPX_OUTPUT_DIR_PER_TRACK = true;
 
-		public final static String VAL_UI_PICTURE_SOURCE_CAMERA = "camera";
-		public final static String VAL_UI_PICTURE_SOURCE_GALLERY = "gallery";
-		public final static String VAL_UI_PICTURE_SOURCE_ASK = "ask";
-		public final static String VAL_UI_PICTURE_SOURCE = VAL_UI_PICTURE_SOURCE_CAMERA;
-		
-		public final static String VAL_UI_BUTTONS_LAYOUT = "default";
 		public final static boolean VAL_UI_DISPLAYTRACK_OSM = false;
 		public final static boolean VAL_UI_DISPLAY_KEEP_ON = true;
-		public final static boolean VAL_SOUND_ENABLED = true;
 		public final static String VAL_UI_ORIENTATION_NONE = "none";
 		public final static String VAL_UI_ORIENTATION_PORTRAIT = "portrait";
 		public final static String VAL_UI_ORIENTATION_LANDSCAPE = "landscape";
@@ -88,12 +68,7 @@ public class OSMTracker {
 		
 		public final static String VAL_UI_MAP_TILE_MAPNIK = "MAPNIK";
 
-		//default values for repository settings
-		public final static String VAL_GITHUB_USERNAME = "labexp";
-		public final static String VAL_REPOSITORY_NAME = "osmtracker-android-layouts";
-		public final static String VAL_BRANCH_NAME = "master";
-		
-	};
+	}
 	
 	/**
 	 * The full Package name of OSMTracker returned by calling

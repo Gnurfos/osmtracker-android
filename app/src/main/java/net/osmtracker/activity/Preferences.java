@@ -35,25 +35,6 @@ public class Preferences extends PreferenceActivity {
 	@SuppressWarnings("unused")
 	private static final String TAG = Preferences.class.getSimpleName();
 	
-	/**
-	 * Directory containing user layouts, relative to storage dir.
-	 */
-	public static final String LAYOUTS_SUBDIR = "layouts";
-	
-	/**
-	 * File extension for layout files
-	 */
-
-	public static final String LAYOUT_FILE_EXTENSION = ".xml";
-
-	/**
-	 * The suffix that must be added to the layout's name for getting its icons directory
-	 * Example: water_supply       <- layout name
-	 *          water_supply_icons <- icon directory
-	 */
-
-	public static final String ICONS_DIR_SUFFIX = "_icons";
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -81,20 +62,8 @@ public class Preferences extends PreferenceActivity {
 			}
 		});
 
-		// Voice record duration
-		Preference pref = findPreference(OSMTracker.Preferences.KEY_VOICEREC_DURATION);
-		pref.setSummary(prefs.getString(OSMTracker.Preferences.KEY_VOICEREC_DURATION, OSMTracker.Preferences.VAL_VOICEREC_DURATION) + " " + getResources().getString(R.string.prefs_voicerec_duration_seconds));
-		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				// Set summary with the number of seconds, following by "seconds"
-				preference.setSummary(newValue+ " " + getResources().getString(R.string.prefs_voicerec_duration_seconds));
-				return true;
-			}
-		});
-
 		// Update GPS logging interval summary to the current value
-		pref = findPreference(OSMTracker.Preferences.KEY_GPS_LOGGING_INTERVAL);
+		Preference pref = findPreference(OSMTracker.Preferences.KEY_GPS_LOGGING_INTERVAL);
 		pref.setSummary(
 				prefs.getString(OSMTracker.Preferences.KEY_GPS_LOGGING_INTERVAL, OSMTracker.Preferences.VAL_GPS_LOGGING_INTERVAL)
 						+ " " + getResources().getString(R.string.prefs_gps_logging_interval_seconds)
@@ -141,28 +110,6 @@ public class Preferences extends PreferenceActivity {
 				preference.setSummary(newPreferenceDisplayValue
 						+ ".\n" + getResources().getString(R.string.prefs_ui_orientation_summary));
 				return true;
-			}
-		});
-
-		// Clear OSM data: Disable if there's no OSM data stored
-		pref = findPreference(OSMTracker.Preferences.KEY_OSM_OAUTH_CLEAR_DATA);
-		if (prefs.contains(OSMTracker.Preferences.KEY_OSM_OAUTH_TOKEN)
-				&& prefs.contains(OSMTracker.Preferences.KEY_OSM_OAUTH_SECRET)) {
-			pref.setEnabled(true);
-		} else {
-			pref.setEnabled(false);
-		}
-		pref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				// Clear data
-				Editor editor = prefs.edit();
-				editor.remove(OSMTracker.Preferences.KEY_OSM_OAUTH_TOKEN);
-				editor.remove(OSMTracker.Preferences.KEY_OSM_OAUTH_SECRET);
-				editor.commit();
-
-				preference.setEnabled(false);
-				return false;
 			}
 		});
 

@@ -31,9 +31,6 @@ public abstract class TrackDetailEditor extends Activity {
 	/** Edit text for track tags */
 	protected EditText etTags;
 
-	/** Spinner for track visibility */
-	protected Spinner spVisibility;
-	
 	/** Whereas to verify if mandatory fields are filled or not */
 	protected boolean fieldsMandatory = false;
 	
@@ -48,7 +45,6 @@ public abstract class TrackDetailEditor extends Activity {
 		etName = (EditText) findViewById(R.id.trackdetail_item_name);
 		etDescription = (EditText) findViewById(R.id.trackdetail_item_description);
 		etTags = (EditText) findViewById(R.id.trackdetail_item_tags);
-		spVisibility = (Spinner) findViewById(R.id.trackdetail_item_osm_visibility);
 
 		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this,
 				android.R.layout.simple_spinner_item);
@@ -56,7 +52,6 @@ public abstract class TrackDetailEditor extends Activity {
 			adapter.add(getResources().getString(v.resId));
 		}
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spVisibility.setAdapter(adapter);
 
 	}
 	
@@ -67,7 +62,6 @@ public abstract class TrackDetailEditor extends Activity {
 
 		etDescription.setText(t.getDescription());
 		etTags.setText(t.getCommaSeparatedTags());
-		spVisibility.setSelection(t.getVisibility().position);
 	}
 
 	/**
@@ -97,8 +91,7 @@ public abstract class TrackDetailEditor extends Activity {
 		// All other values updated even if empty
 		values.put(TrackContentProvider.Schema.COL_DESCRIPTION, etDescription.getText().toString().trim());
 		values.put(TrackContentProvider.Schema.COL_TAGS, etTags.getText().toString().trim());
-		values.put(TrackContentProvider.Schema.COL_OSM_VISIBILITY, Track.OSMVisibility.fromPosition(spVisibility.getSelectedItemPosition()).toString());
-		
+
 		getContentResolver().update(trackUri, values, null, null);	
 
 		// All done

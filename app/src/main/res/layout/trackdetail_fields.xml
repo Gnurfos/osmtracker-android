@@ -28,10 +28,4 @@
         android:inputType="text"
         android:singleLine="true" />
 
-    <Spinner
-        android:id="@+id/trackdetail_item_osm_visibility"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/trackdetail_item_tags" />
-
 </merge>

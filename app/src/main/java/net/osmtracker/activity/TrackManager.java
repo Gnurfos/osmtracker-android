@@ -384,11 +384,6 @@ public class TrackManager extends ListActivity {
 		case R.id.trackmgr_contextmenu_share:
 			new ExportAndShareTask(this, info.id).execute();
 			break;
-		case R.id.trackmgr_contextmenu_osm_upload:
-			i = new Intent(this, OpenStreetMapUpload.class);
-			i.putExtra(TrackContentProvider.Schema.COL_TRACK_ID, info.id);
-			startActivity(i);
-			break;
 		case R.id.trackmgr_contextmenu_display:
 			// Start display track activity, with or without OSM background
 			boolean useOpenStreetMapBackground = PreferenceManager.getDefaultSharedPreferences(this).getBoolean(
