@@ -8,7 +8,7 @@
         android:id="@+id/about_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/acc.osmtracker_logo"
+        android:contentDescription="@string/acc.nosmtracker_logo"
         android:src="@drawable/icon_100x100" >
     </ImageView>
 

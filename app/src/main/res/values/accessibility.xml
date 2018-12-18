@@ -2,7 +2,7 @@
 <resources>
     
     <!-- About screen -->
-    <string name="acc.osmtracker_logo">OSMTracker logo</string>
+    <string name="acc.nosmtracker_logo">NOSMTracker logo</string>
     
     <!-- Zoom in/out in map view -->
     <string name="acc.zoom_in">Zoom in</string>

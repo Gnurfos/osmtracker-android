@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.nastybit.osmtracker"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.nastybit.nosmtracker"
 	android:versionName="0.7" android:versionCode="42" android:installLocation="auto">
 
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -11,17 +11,17 @@
 			android:icon="@mipmap/ic_launcher"
 			android:theme="@style/HighContrast">
 
-		<activity android:name="com.nastybit.osmtracker.activity.TrackManager" android:label="@string/app_name">
+		<activity android:name="com.nastybit.nosmtracker.activity.TrackManager" android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name="com.nastybit.osmtracker.activity.Preferences" android:label="@string/prefs" />
-		<activity android:name="com.nastybit.osmtracker.activity.About" android:label="@string/about" />
+		<activity android:name="com.nastybit.nosmtracker.activity.Preferences" android:label="@string/prefs" />
+		<activity android:name="com.nastybit.nosmtracker.activity.About" android:label="@string/about" />
 
-		<activity android:name="com.nastybit.osmtracker.activity.TrackLogger" android:label="@string/tracklogger" android:launchMode="singleTop">
+		<activity android:name="com.nastybit.nosmtracker.activity.TrackLogger" android:label="@string/tracklogger" android:launchMode="singleTop">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
@@ -30,24 +30,24 @@
 					   android:resource="@xml/shortcuts" />
 		</activity>
 
-		<activity android:name="com.nastybit.osmtracker.activity.WaypointList" android:label="@string/wplist" />
-		<activity android:name="com.nastybit.osmtracker.activity.TrackDetail" android:label="@string/trackdetail" />
-		<activity android:name="com.nastybit.osmtracker.activity.DisplayTrack" android:label="@string/displaytrack" />
-		<activity android:name="com.nastybit.osmtracker.activity.DisplayTrackMap" android:label="@string/displaytrackmap" />
+		<activity android:name="com.nastybit.nosmtracker.activity.WaypointList" android:label="@string/wplist" />
+		<activity android:name="com.nastybit.nosmtracker.activity.TrackDetail" android:label="@string/trackdetail" />
+		<activity android:name="com.nastybit.nosmtracker.activity.DisplayTrack" android:label="@string/displaytrack" />
+		<activity android:name="com.nastybit.nosmtracker.activity.DisplayTrackMap" android:label="@string/displaytrackmap" />
 
-		<service android:name="com.nastybit.osmtracker.service.gps.GPSLogger" android:exported="false">
+		<service android:name="com.nastybit.nosmtracker.service.gps.GPSLogger" android:exported="false">
 			<intent-filter>
-				<action android:name="osmtracker.intent.GPS_SERVICE" />
+				<action android:name="nosmtracker.intent.GPS_SERVICE" />
 			</intent-filter>
 		</service>
 
-		<provider android:name="com.nastybit.osmtracker.db.TrackContentProvider"
-		    android:authorities="com.nastybit.osmtracker.provider"
+		<provider android:name="com.nastybit.nosmtracker.db.TrackContentProvider"
+		    android:authorities="com.nastybit.nosmtracker.provider"
 		    android:exported="false" />
 
 		<provider
-			android:name="com.nastybit.osmtracker.gpx.TrackFileProvider"
-			android:authorities="com.nastybit.osmtracker.fileshareprovider"
+			android:name="com.nastybit.nosmtracker.gpx.TrackFileProvider"
+			android:authorities="com.nastybit.nosmtracker.fileshareprovider"
 			android:exported="false"
 			android:grantUriPermissions="true"/>
 

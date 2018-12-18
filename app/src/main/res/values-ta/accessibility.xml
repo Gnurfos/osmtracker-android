@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!--About screen-->
-  <string name="acc.osmtracker_logo">ஓஎஸ்ஐ கண்காணிப்பின் இலட்சினை</string>
+  <string name="acc.nosmtracker_logo">ஓஎஸ்ஐ கண்காணிப்பின் இலட்சினை</string>
   <!--Zoom in/out in map view-->
   <string name="acc.zoom_in">பெரிதாக்கு</string>
   <string name="acc.zoom_out">சிறிதாக்கு</string>

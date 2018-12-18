@@ -24,10 +24,10 @@
 	</string-array>
 
 	<string-array name="prefs_theme_values">
-		<item>com.nastybit.osmtracker:style/DefaultTheme</item>
-		<item>com.nastybit.osmtracker:style/DarkTheme</item>
-		<item>com.nastybit.osmtracker:style/LightTheme</item>
-		<item>com.nastybit.osmtracker:style/HighContrast</item>
+		<item>com.nastybit.nosmtracker:style/DefaultTheme</item>
+		<item>com.nastybit.nosmtracker:style/DarkTheme</item>
+		<item>com.nastybit.nosmtracker:style/LightTheme</item>
+		<item>com.nastybit.nosmtracker:style/HighContrast</item>
 	</string-array>
 
 	<string-array name="prefs_output_filename_values">

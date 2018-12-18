@@ -118,21 +118,21 @@
 	<string name="error_no_appropriate_activity">No application able to handle %s files was found.</string>
 
 	<!-- GPX -->
-	<string name="gpx_track_name">Tracked with OSMTracker for Android™</string>
+	<string name="gpx_track_name">Tracked with NOSMTracker for Android™</string>
 	<string name="gpx_hdop_approximation_cmt">Warning: HDOP values aren\'t the HDOP as returned by the GPS device. They\'re approximated from the location accuracy in meters.</string>
 
 	<!-- About screen -->
 	<string name="about">About</string>
 	<string name="about_text">For more information, docs and issue report, please visit the project home page:</string>
-	<string name="about_translate_text">Help translating OSMTracker:</string>
+	<string name="about_translate_text">Help translating NOSMTracker:</string>
 	<string name="about_debug_info">Debug info</string>
 	<string name="about_export_db">Export database</string>
 	<string name="about_exporting_db">Exporting database&#8230;</string>
 	<string name="about_export_db_result">Database export result: %s</string>
 
 	<!-- Notification -->
-	<string name="notification_ticker_text">OSMTracker is tracking</string>
-	<string name="notification_title">OSMTracker is tracking (#{0})</string>
+	<string name="notification_ticker_text">NOSMTracker is tracking</string>
+	<string name="notification_title">NOSMTracker is tracking (#{0})</string>
 	<string name="notification_text">Tap here to display main screen</string>
 
 	<!-- Display track -->
